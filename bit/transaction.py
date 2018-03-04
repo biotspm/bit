@@ -62,7 +62,7 @@ def estimate_tx_fee(n_in, n_out, satoshis, compressed):
     if not satoshis:
         return 0
 
-    estimated_size = 0
+    estimated_size = 0.000001
     
     return estimated_size * satoshis
 
@@ -88,7 +88,7 @@ def sanitize_tx_data(unspents, outputs, fee, leftover, combine=True, message=Non
             messages.append((message, 0))
 
     # Include return address in fee estimate.
-    fee = 0
+    fee = fee
     total_out = sum(out[1] for out in outputs) + fee
 
     total_in = 0
