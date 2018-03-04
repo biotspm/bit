@@ -230,7 +230,7 @@ class PrivateKey(BaseKey):
         unspents, outputs = sanitize_tx_data(
             unspents or self.unspents,
             outputs,
-            fee or get_fee_cached(),
+            0,
             leftover or self.address,
             combine=combine,
             message=message,
