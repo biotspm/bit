@@ -88,7 +88,7 @@ def sanitize_tx_data(unspents, outputs, fee, leftover, combine=True, message=Non
             messages.append((message, 0))
 
     # Include return address in fee estimate.
-    fee = estimate_tx_fee(len(unspents), len(outputs) + len(messages) + 1, fee, compressed)
+    fee = 0
     total_out = sum(out[1] for out in outputs) + fee
 
     total_in = 0
