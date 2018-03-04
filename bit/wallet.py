@@ -230,7 +230,7 @@ class PrivateKey(BaseKey):
         unspents, outputs = sanitize_tx_data(
             unspents or self.unspents,
             outputs,
-            0,
+            fee,
             leftover or self.address,
             combine=combine,
             message=message,
@@ -325,7 +325,7 @@ class PrivateKey(BaseKey):
         unspents, outputs = sanitize_tx_data(
             unspents or NetworkAPI.get_unspent(address),
             outputs,
-            0,
+            fee,
             leftover or address,
             combine=combine,
             message=message,
@@ -514,7 +514,7 @@ class PrivateKeyTestnet(BaseKey):
         unspents, outputs = sanitize_tx_data(
             unspents or self.unspents,
             outputs,
-            0,
+            fee,
             leftover or self.address,
             combine=combine,
             message=message,
@@ -560,7 +560,7 @@ class PrivateKeyTestnet(BaseKey):
         """
 
         tx_hex = self.create_transaction(
-            outputs, fee=0, leftover=leftover, combine=combine, message=message, unspents=unspents
+            outputs, fee=fee, leftover=leftover, combine=combine, message=message, unspents=unspents
         )
 
         NetworkAPI.broadcast_tx_testnet(tx_hex)
@@ -609,7 +609,7 @@ class PrivateKeyTestnet(BaseKey):
         unspents, outputs = sanitize_tx_data(
             unspents or NetworkAPI.get_unspent_testnet(address),
             outputs,
-            0,
+            fee,
             leftover or address,
             combine=combine,
             message=message,
