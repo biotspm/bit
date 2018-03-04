@@ -56,14 +56,19 @@ Output = namedtuple('Output', ('address', 'amount', 'currency'))
 def calc_txid(tx_hex):
     return bytes_to_hex(double_sha256(hex_to_bytes(tx_hex))[::-1])
 
-
 def estimate_tx_fee(n_in, n_out, satoshis, compressed):
 
     if not satoshis:
         return 0
 
-    estimated_size = 0.000001
-    
+    estimated_size = (
+        n_in * (148 if compressed else 180)
+        + len(int_to_unknown_bytes(n_in, byteorder='little'))
+        + n_out * 34
+        + len(int_to_unknown_bytes(n_out, byteorder='little'))
+        + 8
+    )
+
     return estimated_size * satoshis
 
 
