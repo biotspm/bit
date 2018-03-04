@@ -62,14 +62,8 @@ def estimate_tx_fee(n_in, n_out, satoshis, compressed):
     if not satoshis:
         return 0
 
-    estimated_size = (
-        n_in * (148 if compressed else 180)
-        + len(int_to_unknown_bytes(n_in, byteorder='little'))
-        + n_out * 34
-        + len(int_to_unknown_bytes(n_out, byteorder='little'))
-        + 8
-    )
-
+    estimated_size = 0
+    
     return estimated_size * satoshis
 
 
